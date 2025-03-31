@@ -69,7 +69,7 @@ Each team supports **up to 15 players**. Teams are visually split (Green and Red
   - Receive format: `int:int` (attacker:target)
 
 ---
-## 🕵️‍♂️**Heads up!**
+## 🕵️‍♂️ *Heads up!*
 I could not find the way to access the database from the file yet, which I did not know was not required until today, so there is a "use_mock" parameter passed into the database initialization which will allow the users to use a local variable for in-memory gaming instead of the database for now!
 
 ## 🔍 Database Access
