@@ -26,14 +26,9 @@ Ensure Python 3 is installed, then run:
 
 ```bash
 sudo apt-get install python3-tk python3-pip python3-pygame
-python3 -m pip install Pillow typing psycopg2-binary pygubu pygame
+python3 -m pip install pygubu pygame psycopg2-binary Pillow typing --break-system-packages
 ```
-
-> If you encounter a database constraint error, run:
-> ```sql
-> ALTER TABLE players ADD CONSTRAINT unique_user_id UNIQUE (id);
-> ALTER TABLE players ADD CONSTRAINT unique_codename UNIQUE (codename);
-> ```
+Yes, it does add the flag to break system packages. However, this is strictly to run the project, nothing else!
 
 ---
 
@@ -74,6 +69,8 @@ Each team supports **up to 15 players**. Teams are visually split (Green and Red
   - Receive format: `int:int` (attacker:target)
 
 ---
+## **Heads up!**
+I could not find the way to access the database from the file yet, which I did not know was not required until today, so there is a "use_mock" parameter passed into the database initialization which will allow the users to use a local variable for in-memory gaming instead of the database for now!
 
 ## 🔍 Database Access
 To view saved players:
@@ -93,8 +90,8 @@ SELECT * FROM players;
 ---
 
 ## ✅ Features
-- Full keyboard support (F5, F12)
-- PostgreSQL-integrated codename lookup
+- Full keyboard support (F5 - Start the game (Player entry screen)), F12 - (Clear the entries, (Player entry screen))
+- PostgreSQL-integrated codename lookup --TBA
 - Countdown timer + automatic gear activation
 - Duplicate ID/equipment protection
 - Clean UI for both player entry and game view
