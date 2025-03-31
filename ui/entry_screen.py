@@ -18,7 +18,6 @@ class EntryScreenUI:
 
     def build(self):
         self._setup_root()
-        self._build_canvas()
         self._build_main_frame()
         self._build_team_ui("green", "Green", "#007F00")
         self._build_team_ui("red", "Red", "#AA0000")
@@ -32,15 +31,9 @@ class EntryScreenUI:
         self.root.grid_columnconfigure(0, weight=1)
         self.root.update_idletasks()
 
-    def _build_canvas(self):
-        self.canvas = tk.Canvas(self.root, highlightthickness=0)
-        self.canvas.grid(row=0, column=0, sticky="nsew")
-        self.canvas.create_rectangle(0, 0, self.root.winfo_screenwidth() // 2, self.root.winfo_screenheight(), fill="#004d00", outline="")
-        self.canvas.create_rectangle(self.root.winfo_screenwidth() // 2, 0, self.root.winfo_screenwidth(), self.root.winfo_screenheight(), fill="#660000", outline="")
-
     def _build_main_frame(self):
-        self.main_frame = tk.Frame(self.canvas, bg="black")
-        self.canvas.create_window(self.root.winfo_screenwidth() // 2, self.root.winfo_screenheight() // 2, window=self.main_frame, anchor="center")
+        self.main_frame = tk.Frame(self.root, bg="black")
+        self.main_frame.grid(row=0, column=0, sticky="nsew")
         self.team_frame = tk.Frame(self.main_frame, bg="black")
         self.team_frame.grid(row=0, column=0, pady=(30, 10), padx=30)
 
@@ -76,8 +69,7 @@ class EntryScreenUI:
             codename_entry.delete(0, tk.END)
             if record and record[1].lower() != "unknown":
                 codename_entry.insert(0, record[1])
-        except Exception as e:
-            print("error" + str(e))
+        except:
             codename_entry.delete(0, tk.END)
 
     def _clear_all(self):
@@ -95,8 +87,7 @@ class EntryScreenUI:
                 messagebox.showinfo("Success", "Server port updated.")
             else:
                 messagebox.showerror("Error", "Failed to update port.")
-        except Exception as e:
-            print("error" + str(e))
+        except:
             messagebox.showerror("Error", "Invalid port number.")
 
     def _parse_row(self, team, i, eq_entry, uid_entry, code_entry, seen_user_ids, seen_eq_ids):
@@ -148,3 +139,5 @@ class EntryScreenUI:
     def _bind_keys(self):
         self.root.bind("<F5>", lambda e: self._submit_all())
         self.root.bind("<F12>", lambda e: self._clear_all())
+
+
